@@ -19,10 +19,13 @@ class UI {
     const list = document.querySelector("#problem-list");
 
     const row = document.createElement("tr");
+    // Adjusts display of solution in the table
+    let solutionHeight = problem.solution.length > 200 ? "250px" : "auto";
+    let detailHeight = problem.detail.length > 200 ? "250px" : "auto";
 
     row.innerHTML = `
-        <td>${problem.detail}</td>
-        <td><code class="text-primary">${problem.solution}</code></td>
+        <td><textarea readonly="on" style="height:${detailHeight}">${problem.detail}</textarea></td>
+        <td><textarea readonly="on" style="height:${solutionHeight}">${problem.solution}</textarea></td>
         <td>${problem.date}</td>
         <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
         `;
@@ -83,8 +86,27 @@ class Store {
     });
   }
 }
+// Event: Grows active form input
+document.querySelector("#detail").addEventListener("focus", e => {
+  console.log(e.target);
+  e.target.setAttribute("rows", "10");
+});
+document.querySelector("#solution").addEventListener("focus", e => {
+  console.log(e.target);
+  e.target.setAttribute("rows", "10");
+});
 
-// Event: Display Problems
+document.querySelector("#detail").addEventListener("blur", e => {
+  console.log(e.target);
+  e.target.setAttribute("rows", "1");
+});
+document.querySelector("#solution").addEventListener("blur", e => {
+  console.log(e.target);
+  e.target.setAttribute("rows", "1");
+});
+
+document.querySelector;
+// Event: Display Problems()
 document.addEventListener("DOMContentLoaded", UI.displayProblems);
 
 // Event: Add a Problem
